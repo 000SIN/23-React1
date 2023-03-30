@@ -3,14 +3,17 @@
 ## 3/30 5주차
 ##### 1.엘리먼트 렌더링 하기
 
+<pre>
 <code>
 <div id = "root"></div?>
 </code>
+</pre>
 
 
 div태그로 단순하지만 리액트에 필수로 들어가는 중요 코드임
 이 div 태그 안에 리액트 엘리먼트가 렌더링 되며, 이 것을 root DOM 이라고 한다.
 
+<pre>
 <code>
 function tick() {
     const element = (
@@ -25,6 +28,7 @@ function tick() {
 
 setInterval(tick, 1000);
 </code>
+</pre>
 
 
 setInterval() 함수 = 위에 정의한 tick()를 1초에 한번씩 호출시켜줌
