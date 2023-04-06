@@ -11,6 +11,21 @@ state에 포함시켜야함
 
 (2) 특징
 - 리액트만의 특별한 형태가 아닌 다만 JS 객체일 뿐이다.
+- state는 변경이 가능하다고는 하지만 직접 수정해서는 안되기에 불가능하다고 생각하는 것이 좋음(만약 변경을 원한다면 setstate()함수 사용이 필수)
+
+#### 2. component VS. element VS. instance
+(0) 비유
+- 지료 : element 
+- 빵 틀 : component 
+- 재료를 빵 틀에 넣고 만든 빵 : instance
+
+#### 3. 생명주기에 대해 알아보기
+- 생명주기 = 컴포넌트의 생성 시점, 사용 시점, 종료 시점을 나타내는 것
+- constructor가 실행 되면서 컴포넌트가 생성됨
+- 생성 직후 conponentDidMount()함수가 호출됨
+- 컴포넌트가 소멸하기 전까지 여러 번 랜더링 할 것
+- 랜더링은 props, setState(), forceUpdate()에 의해 상태가 변경되면 이루어짐. 그리고 랜더링이 끝나면 conponentDidUpdate()함수가 호출됨.
+- 마지막으로 컴포넌트가 언마운트 되면 conponentWillUnmount() 함수가 호출됨
 
 
 
