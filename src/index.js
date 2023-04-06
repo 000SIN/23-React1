@@ -9,7 +9,7 @@ import Clock from './chapter_04/Clock';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Clock/>
+    <CmmentList/>
   </React.StrictMode>
 );
 
