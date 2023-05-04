@@ -12,6 +12,16 @@
 ### 여러 개의 컴포넌트 렌더링 하기
 여러개의 같은 컴포넌트를 화면에 반복적으로 나타내야 할 경우, 배열에 들어있는 엘리먼트를 map()함수를 이용하여 렌더링 합니다.
 
+const doubled = numbers.map((number) => number * 2);
+= numbers 배열에 들어있는 각각의 요소를 map()을 이용하여 하나씩 추출, 2를 곱한 후 doubled이라는 배열에 다시 넣는 코드
+
+예제 
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) => 
+<li>{number}</li>
+);
+= 이 코드는 numbers에 2를 곱하는 대신에 <li>태그를 결합하여 리턴하고 있음. 리턴된 listItems는 <ul>태그와 결합하여 렌더링 된다.
+
 ## 4/27 9주차
 ### Chapter10. 리스트와 키
 ### 1 여러 개의 컴포넌트 렌더링하기
@@ -97,8 +107,11 @@ functing Greeting(props){
 
 이벤트가 발생하는 것을 계속 듣고 있다는 의미로 "이벤트 리스너" 라고도 함
 
+<<<<<<< HEAD
 ## 4/20 8주차 중간고사
 
+=======
+>>>>>>> 6294043eb4dffff6e6c74f75a287a6b6ce087a1a
 ## 4/13 7주차
 #### 1. 종류
  (1) useCallback
