@@ -60,6 +60,12 @@ ReactDOM.render(
 - 리액트에서는 state를 통해 태그의 value라는 attribute를 변경하여 텍스트를 표시한다.
 - select 태그도 taxtarea와 동일하다
 
+### File input 태그
+- File input 태그는 그 값이 일기 전용이기 때문에 리액트에서는 비에저 컴포넌트 된다.
+```
+<input type="file />
+```
+
 ## 4/27 9주차
 ### Chapter10. 리스트와 키
 ### 1 여러 개의 컴포넌트 렌더링하기
