@@ -23,6 +23,7 @@ const listItems = numbers.map((number) =>
 ### 기본적인 리스트 컴포넌트
 앞서 작성한 코드를 별도의 컴포넌트로 분리, 이 컴포넌트는 props로 받은 숫자를 numbers로 받아 리스트로 렌더링해 줍니다.
 
+```
 function NumberList(props) {
     const{numbers} = props;
 
@@ -34,12 +35,15 @@ function NumberList(props) {
         <ul>{listItems}</ul>
     );
 }
+```
 
+```
 const numbers = [ 1, 2, 3, 4, 5];
 ReactDOM.render(
     <NumberList numbers={numbers}/>,
     document.getElementById('root')
 );
+```
 
 = 본 코드 사용시 키가 없다고 나온다.
 
@@ -47,6 +51,14 @@ ReactDOM.render(
 - 리스트에서의 키는 리스트에서 아이템을 구별하기 위한 고유한 문자열이다.
 - 이 키는 리스트에서 어떤 아이템이 변경, 추가 또는 제거되었는지 구분하기 위해 사용함
 - 키는 같은 엘리먼트 사이에서만 고유한 값이면 됨
+
+### 제어 컴포넌트
+- 제어 컴포넌트는 사용자가 입력한 값에 접근하고 제어할 수 있도록 해주는 컴포넌트이이다.
+
+### textarea 태그 / select 태그
+- HTML 에서 <textarea> 의 children으로 텍스트가 들어가는 형태이다.
+- 리액트에서는 state를 통해 태그의 value라는 attribute를 변경하여 텍스트를 표시한다.
+- select 태그도 taxtarea와 동일하다
 
 ## 4/27 9주차
 ### Chapter10. 리스트와 키
