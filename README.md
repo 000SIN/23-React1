@@ -65,6 +65,35 @@ ReactDOM.render(
 ```
 <input type="file />
 ```
+### 여러 개의 입력 다루기
+- 하나의 컴포넌트에서 여러개의 입력을 다루기 위해서는 여러 개의 state를 선언
+```
+const [haveBreakfast, setHaveBreakfast] = useState(true);
+const [numberOfGuest, setNumberOfGuest] = useState(2);
+
+const handleSubmit = (event) => {
+    alert(`아침 식사여부: ${haveBreakfast}, 방문객 수: ${numberOfGuest}`);
+}
+```
+### Input Null Value
+- 제어 컴포넌트에 value prop을 정해진 값으로 넣으면 코드를 수정하지 않는 한 입력값 변경 불가능
+- value prop은 넣되 자유롭게 입력할 수 있도록 만들고 싶으면 값이 undefined 또는 null을 넣는다
+```
+setTimeout(function(){
+        ReactDOM.render(<input value={null} />,rootNode);
+    }, 1000);
+
+```
+
+### Shared State
+- shared state는 공유된 state를 의미
+- 어떤 컴포넌트의 state에 있는 데이터를 여러 개의 하위 컴포넌트에서 공통적으로 사용하는 경우
+- 하위 컴포넌트가 공통된 부모 컴포넌트의 state를 공유하여 사용하는 것을 shared state라고 한다.
+
+### Calculator 컴포넌트 변경하기
+- 상위 컴포넌트인 Calculator에서 온도 값가 단위를 각각 state를 가지고 있음
+- 두 개의 하위 컴포넌트는 섭씨와 화씨로 변환된 온도 값을 업데이트하기 위한 props로 가지고 있음
+- 이처럼 공통된 상위 컴포넌트로 올려서 공유하는 방법을 사용하면 더욱 간결하고 효율적
 
 ## 4/27 9주차
 ### Chapter10. 리스트와 키
