@@ -18,6 +18,8 @@ Context.Provider
 4. Context.Consumer
 - 함수형 컴포넌트에서 Context.Consumer를 사용하여 컴텍스트 구독 가능
 - 컴포넌트의 자식으로 함수가 올 수 있는데 이것을 function as a child라고 함
+- 하나의 Provider컴포넌트는 여러개의 consumer 컴포넌트에 연결될 수 있음
+- 상위 레벨에 매칭되는 Provider가 없을 경우 기본값이 사용됨
 
 5. Context.displayName
 - 컨텍스트 객체는 displayName이라는 문자열 속성을 가짐
