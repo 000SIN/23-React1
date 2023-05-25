@@ -31,6 +31,8 @@ Context.Provider
 <UseContext>
 -함수형 컴포넌트에서 컨텍스트를 사용하기 위해 컴포넌트를 매번 Consumer 컴포넌트로 감싸주는 것보다 더 좋은 방법이 있음 = Hook
 -useContext()훅은 React.createContext() 함수 호출로 생성된 컨텍스트 객체를 인자로 받아서 현재 컨텍스트의 값을 리턴함
+
+
 ```
 function MyComponent(props) {
     const value = useContext(MyContext);
@@ -40,6 +42,7 @@ function MyComponent(props) {
     )
 }
 ```
+
 - 이 방법도 가장 가까운 상위 Provider로 부터 컨텍스트의 값을 받아옴
 - 만일 값이 변경되면 useContext()훅을 사용하는 컴포넌트가 재 렌더링됨
 - 또한 useContext()훅을 사용할 때에는 파라미터로 컨텍스트 객체를 넣어줘야 한다는 것을 기억해야함
