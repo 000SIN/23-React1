@@ -1,5 +1,50 @@
 # 202130432 최지민
-##5/25 13주차
+## 5/25 13주차
+
+
+<컨텍스트 API>
+1. React.createContext
+- 컨텍스트를 생성하기 위한 함수
+- 파라메타에는 기본값 삽입 
+Context.Provider
+2. Context.Provider 컴포넌트로 하위 컴포넌트들을 감싸주면 모든 하위 컴포넌트들이 해당 컨텍스트의 데이터에 접근할 수 있게 됨
+- Provider 컴포넌트에는 value라는 prop이 있고, 이건 Provider컴포넌트 하위에 있는 컴포넌트로 전달
+- 하위 컴포넌트를 consumer 컴포넌트라고 부름
+
+3. Class.contextType
+- Provider 하위에 있는 클래스 컴포넌트에서 컨텍스트의 데이터에 접근하기 위해 사용
+- Class 컴포넌트는 더 이상 사용하지 않으므로 참고만
+
+4. Context.Consumer
+- 함수형 컴포넌트에서 Context.Consumer를 사용하여 컴텍스트 구독 가능
+- 컴포넌트의 자식으로 함수가 올 수 있는데 이것을 function as a child라고 함
+
+5. Context.displayName
+- 컨텍스트 객체는 displayName이라는 문자열 속성을 가짐
+- 크롬의 리액트 개발자 도구에서는 컨텍스트의 Provider나 Consumer를 표시할 때 displayName을 함께 표시해줌
+
+
+<여러개의 컨텍스트 사용하기>
+- 여러개의 컨텍스트를 동시에 사용하려면 Context.Provider를 중첩하여 사용하면됨(예제에서는 ThemeContext나 UserContext를 중첩하여 사용하고 있음)
+- 허나 두 개 또는 그 이상의 컨텍스트 값이 자주 함께 사용될 경우, 모든 값을 한번에 제공해 주는 별도의 render prop 컴포넌트를 직접 만드는 것을 고려하는게 좋음
+
+<UseContext>
+-함수형 컴포넌트에서 컨텍스트를 사용하기 위해 컴포넌트를 매번 Consumer 컴포넌트로 감싸주는 것보다 더 좋은 방법이 있음 = Hook
+-useContext()훅은 React.createContext() 함수 호출로 생성된 컨텍스트 객체를 인자로 받아서 현재 컨텍스트의 값을 리턴함
+```
+function MyComponent(props) {
+    const value = useContext(MyContext);
+
+    return(
+        ...
+    )
+}
+```
+- 이 방법도 가장 가까운 상위 Provider로 부터 컨텍스트의 값을 받아옴
+- 만일 값이 변경되면 useContext()훅을 사용하는 컴포넌트가 재 렌더링됨
+- 또한 useContext()훅을 사용할 때에는 파라미터로 컨텍스트 객체를 넣어줘야 한다는 것을 기억해야함
+
+
 
 ## 5/18 12주차
 ### Chapter 14. 컨텍스트
