@@ -1,5 +1,333 @@
 # 202130432 최지민
-## 5/4 11
+<<<<<<< HEAD
+=======
+
+## 5/12 12주차
+### Chapter 14. 컨텍스트
+
+<컨텍스트 API>
+
+1. React.createContext
+- 컨텍스트를 생성하기 위한 함수
+- 파라메타에는 기본값 삽입
+- 하위 컴포넌트는 가장 가까운 상위 레벨의 Provider부터 컨텍스트를 받게 되지만, 
+- 만일 Provider를 찾을 수 없다면 위에서 설장한 기본값을 사용하게 된다
+
+2. Context.Provider
+- Context.Provider 컴포넌트르 하위 컴포넌트를 감싸주면 모든 하위 컴포넌트들이 해당 컨텍스트에 접근 가능
+- 하위 컴포넌트를 consumer 컴포넌트라 부름
+
+3. Class.contextType
+- Provider 하위에 있는 클래스 컴포넌트에서 컨텍스트의 데이터에 접근하기 위해 사용
+- Class 컴포넌트는 더 이상 사용하지 않으므로 참고
+
+4. Context.Consumer
+- 함수형 컴포넌트에서 Context.Consumer를 사용하여 컨텍스트를 구독
+- 컴포넌트의 자식으로 함수가 올 수 있는데 이것을 function as a child 라고 함
+
+5. Context.displayName
+- 컨텍스트 객체는 displayName이라는 문자열 속성을 갖는다
+
+<컨텍스트를 사용하기 전에 고려할 점>
+- 컨텍스트는 다른 레벨의 많은 컴포넌트가 특정 데이터를 필요로 하는경우에 사용
+- 컨텍스트를 사용하는 것이 무조건 좋은 것X
+- 컴포넌트와 컨텍스트가 연동되면 재사용성이 떨어지기 때문(props를 통해 데이터를 전달하는 컴포넌트 합성 방법이 더 적합)
+
+- 데이터가 많아질수록 상위 컴포넌트는 복잡
+- 어떠한 경우에는 하나의 데이터에 다양한 레벨에 있는 중첩딘 컴포넌트의 접근이 필요(이러한 경우 컨텍스트가 유리)
+
+예제처럼 props를 통해 데이터를 전달하는 기존 방식은 컴포넌트가 깊어질수록 복잡
+반복적인 코드를 계속해서 작성해야 하기 때문에 비효율적이고 가독성이 떨어짐
+컨텍스트를 사용하면 이러한 문제점을 깔끔하게 개선 가능
+
+React.createContext()함수를 사용 -> ThemeContext라는 이름의 컨텍스트를 생성
+
+컨텍스트를 사용하려면 컴포넌트의 상위 컴포넌트에서 Provider로 감싸주어야 함
+
+14.1 컨텍스트란 무엇인가?
+- 기존의 일반적인 리액트에서는 데이터가 컴포넌트의 props를 통해 부모에서 자식을 단방향 전달
+- 컨텍스트는 리액트 컴포넌트들 사이에서 데이터를 기존의 props를 통해 전달하는 방식대신 '컴포넌트 트리를 통해 곧바로 컴포넌트에 전달하는 새로운 방식'을 제공
+- 컨텍스트를 사용하면 일일이 props로 전달할 필요 없이 데이터를 필요로 하는 컴포넌트에 바로 전달 가능
+
+합성vs.상속
+합성과 대비되는 개념으로 상속(Inheritance)
+자식 클래스는 부모 클래스가 가진 변수나 함수 등의 속성을 모두 갖게 되는 개념
+리액트에서는 상속보다는 합성을 통해 새로운 컴포넌트를 생성
+
+합성(Composition)은 '여러 개의 컴포넌트를 합쳐서 새로운 컴포넌트를 만드는 것'
+조합 방법에 따라 합성의 사용 기법은 다음과 같이 나눌 수 있음
+1. Containment
+특정 컴포넌트를가 하위 컴포넌트를 포함하는 형태의 합성 방법
+컴포넌트에 따라서는 어떤 자식 엘리먼트가 들어올 지 미리 예상할 수 없는 경우 있음
+범용적인 '박스'역할을 하는 Sidebar 혹은 Dialog와 같은 컴포넌트에서 자주 볼 수 있음
+
+2. Specialization
+웰컴다이얼로그는 다이얼로그의 특별케이스
+범용적인 개념을 구별이 되게 구체화하는 것을 특수화라고 함
+객체지향 언어에서는 상속을 사용하여 특수화 구현
+리액트에서는 합성을 사용하여 특수화를 구현
+다음 예와 같이 특수화는 범용적으로 쓸 수 있는 컴포넌트를 만들어 놓고 특수한 목적으로 사용
+
+3. Containment와 Specialization을 같이 사용하기
+
+
+## 5/11 11주차
+### jsx 작성
+#### Calculator.jsx
+```
+import React, { useState} from "react";
+import TemperatureInput from "./TemperatureInput";
+
+function BoilingVerdict(props) {
+    if(props.celsius >= 100) {
+        return <p>  물이 끓습니다. </p>
+    }
+
+    return <p>물이 끓지 않습니다.</p>
+}
+
+function toCelsius(fahrenheit) {
+    return((fahrenheit - 32) * 5) / 9 ;
+}
+
+function toFahrenheit(celsius) {
+    return (celsius * 9 ) / 5 + 32;
+}
+
+function tryConvert(temperature, convert) {
+    const input = parseFloat(temperature);
+    if(Number.isNaN(input)) {
+        return ""
+    }
+    const output = convert(input);
+    const rounded = Math.round(output * 1000) / 1000;
+    return rounded.toString();
+}
+
+function Calculator(props) {
+    const [temperature, setTemperature] = useState("");
+    const [scale, setScale] = useState("c");
+
+    const handleCelsiusChange = (temperature) => {
+        setTemperature(temperature);
+        setScale("c");
+    };
+
+    const handleFahrenheitChange = (temperature) => {
+        setTemperature(temperature);
+        setScale("f");
+    };
+
+    const celsius = 
+        scale === "f" ? tryConvert(temperature, toCelsius) : temperature;
+        const fahrenheit = 
+        scale === "c" ? tryConvert(temperature, toFahrenheit) : temperature;    
+
+        return (
+            <div>
+                    <TemperatureInput
+                    scale="c"
+                    temperature={celsius}
+                    onTemperatureChange={handleCelsiusChange}
+                    />
+                    <TemperatureInput
+                    scale="f"
+                    temperature={fahrenheit}
+                    onTemperatureChange={handleFahrenheitChange}
+                    />
+                    <BoilingVerdict celsius={parseFloat(celsius)}/>
+            </div>
+        );
+}
+
+export default Calculator;
+```
+#### TemperatureInput.jsx
+```
+const scaleNames = {
+    c: "섭씨",
+    f: "화씨",
+};
+
+function TemperatureInput(props) {
+    const handleChange = (event) => {
+        props.onTemperatureChange(event.target.value)
+    };
+
+return (
+    <fieldset>
+        <legend>
+            온도를 입력해주세요.(단위: {scaleNames[props.scale]});
+        </legend>
+        <input value={props.Temperature} onChange={handleChange}/>
+    </fieldset>
+
+    );
+}
+
+export default TemperatureInput;
+```
+>>>>>>> 3a07bf1d71ea41d30d5eee68cd8b6e01f64b6b3e
+
+## 5/12 12주차
+### Chapter 14. 컨텍스트
+
+<컨텍스트 API>
+
+1. React.createContext
+- 컨텍스트를 생성하기 위한 함수
+- 파라메타에는 기본값 삽입
+- 하위 컴포넌트는 가장 가까운 상위 레벨의 Provider부터 컨텍스트를 받게 되지만, 
+- 만일 Provider를 찾을 수 없다면 위에서 설장한 기본값을 사용하게 된다
+
+2. Context.Provider
+- Context.Provider 컴포넌트르 하위 컴포넌트를 감싸주면 모든 하위 컴포넌트들이 해당 컨텍스트에 접근 가능
+- 하위 컴포넌트를 consumer 컴포넌트라 부름
+
+3. Class.contextType
+- Provider 하위에 있는 클래스 컴포넌트에서 컨텍스트의 데이터에 접근하기 위해 사용
+- Class 컴포넌트는 더 이상 사용하지 않으므로 참고
+
+4. Context.Consumer
+- 함수형 컴포넌트에서 Context.Consumer를 사용하여 컨텍스트를 구독
+- 컴포넌트의 자식으로 함수가 올 수 있는데 이것을 function as a child 라고 함
+
+5. Context.displayName
+- 컨텍스트 객체는 displayName이라는 문자열 속성을 갖는다
+
+<컨텍스트를 사용하기 전에 고려할 점>
+- 컨텍스트는 다른 레벨의 많은 컴포넌트가 특정 데이터를 필요로 하는경우에 사용
+- 컨텍스트를 사용하는 것이 무조건 좋은 것X
+- 컴포넌트와 컨텍스트가 연동되면 재사용성이 떨어지기 때문(props를 통해 데이터를 전달하는 컴포넌트 합성 방법이 더 적합)
+
+- 데이터가 많아질수록 상위 컴포넌트는 복잡
+- 어떠한 경우에는 하나의 데이터에 다양한 레벨에 있는 중첩딘 컴포넌트의 접근이 필요(이러한 경우 컨텍스트가 유리)
+
+예제처럼 props를 통해 데이터를 전달하는 기존 방식은 컴포넌트가 깊어질수록 복잡
+반복적인 코드를 계속해서 작성해야 하기 때문에 비효율적이고 가독성이 떨어짐
+컨텍스트를 사용하면 이러한 문제점을 깔끔하게 개선 가능
+
+React.createContext()함수를 사용 -> ThemeContext라는 이름의 컨텍스트를 생성
+
+컨텍스트를 사용하려면 컴포넌트의 상위 컴포넌트에서 Provider로 감싸주어야 함
+
+14.1 컨텍스트란 무엇인가?
+- 기존의 일반적인 리액트에서는 데이터가 컴포넌트의 props를 통해 부모에서 자식을 단방향 전달
+- 컨텍스트는 리액트 컴포넌트들 사이에서 데이터를 기존의 props를 통해 전달하는 방식대신 '컴포넌트 트리를 통해 곧바로 컴포넌트에 전달하는 새로운 방식'을 제공
+- 컨텍스트를 사용하면 일일이 props로 전달할 필요 없이 데이터를 필요로 하는 컴포넌트에 바로 전달 가능
+
+합성vs.상속
+합성과 대비되는 개념으로 상속(Inheritance)
+자식 클래스는 부모 클래스가 가진 변수나 함수 등의 속성을 모두 갖게 되는 개념
+리액트에서는 상속보다는 합성을 통해 새로운 컴포넌트를 생성
+
+합성(Composition)은 '여러 개의 컴포넌트를 합쳐서 새로운 컴포넌트를 만드는 것'
+조합 방법에 따라 합성의 사용 기법은 다음과 같이 나눌 수 있음
+1. Containment
+특정 컴포넌트를가 하위 컴포넌트를 포함하는 형태의 합성 방법
+컴포넌트에 따라서는 어떤 자식 엘리먼트가 들어올 지 미리 예상할 수 없는 경우 있음
+범용적인 '박스'역할을 하는 Sidebar 혹은 Dialog와 같은 컴포넌트에서 자주 볼 수 있음
+
+2. Specialization
+웰컴다이얼로그는 다이얼로그의 특별케이스
+범용적인 개념을 구별이 되게 구체화하는 것을 특수화라고 함
+객체지향 언어에서는 상속을 사용하여 특수화 구현
+리액트에서는 합성을 사용하여 특수화를 구현
+다음 예와 같이 특수화는 범용적으로 쓸 수 있는 컴포넌트를 만들어 놓고 특수한 목적으로 사용
+
+3. Containment와 Specialization을 같이 사용하기
+
+## 5/4 11주차
+Temperature 변환 및 자습
+```
+const scaleNames = {
+    c: "섭씨",
+    f: "화씨",
+};
+
+function TemperatureInput(props) {
+    const handleChange = (event) => {
+        props.onTemperatureChange(event.target.value)
+    };
+
+return (
+    <fieldset>
+        <legend>
+            온도를 입력해주세요.(단위: {scaleNames[props.scale]});
+        </legend>
+        <input value={props.Temperature} onChange={handleChange}/>
+    </fieldset>
+
+    );
+}
+
+export default TemperatureInput;
+```
+```
+import React, { useState} from "react";
+import TemperatureInput from "./TemperatureInput";
+
+function BoilingVerdict(props) {
+    if(props.celsius >= 100) {
+        return <p>  물이 끓습니다. </p>
+    }
+
+    return <p>물이 끓지 않습니다.</p>
+}
+
+function toCelsius(fahrenheit) {
+    return((fahrenheit - 32) * 5) / 9 ;
+}
+
+function toFahrenheit(celsius) {
+    return (celsius * 9 ) / 5 + 32;
+}
+
+function tryConvert(temperature, convert) {
+    const input = parseFloat(temperature);
+    if(Number.isNaN(input)) {
+        return ""
+    }
+    const output = convert(input);
+    const rounded = Math.round(output * 1000) / 1000;
+    return rounded.toString();
+}
+
+function Calculator(props) {
+    const [temperature, setTemperature] = useState("");
+    const [scale, setScale] = useState("c");
+
+    const handleCelsiusChange = (temperature) => {
+        setTemperature(temperature);
+        setScale("c");
+    };
+
+    const handleFahrenheitChange = (temperature) => {
+        setTemperature(temperature);
+        setScale("f");
+    };
+
+    const celsius = 
+        scale === "f" ? tryConvert(temperature, toCelsius) : temperature;
+        const fahrenheit = 
+        scale === "c" ? tryConvert(temperature, toFahrenheit) : temperature;    
+
+        return (
+            <div>
+                    <TemperatureInput
+                    scale="c"
+                    temperature={celsius}
+                    onTemperatureChange={handleCelsiusChange}
+                    />
+                    <TemperatureInput
+                    scale="f"
+                    temperature={fahrenheit}
+                    onTemperatureChange={handleFahrenheitChange}
+                    />
+                    <BoilingVerdict celsius={parseFloat(celsius)}/>
+            </div>
+        );
+}
 
 export default Calculator;
 ```
